@@ -20,9 +20,8 @@ class WeatherBloc extends BaseBloc {
         //return data to main isolate
 
         debugPrint('weather data fetched');
-        debugPrint(state.value);
-        // latestWeather = weatherFromJson(state.value);
-        // debugPrint(latestWeather?.toJson().toString());
+
+        latestWeather = Weather.fromJson(state.value);
 
         loadingController.sink.add(false);
         return state.value;
