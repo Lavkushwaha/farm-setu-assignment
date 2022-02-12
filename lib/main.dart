@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:farm_setu_assignment/app.dart';
+import 'package:farm_setu_assignment/configs/app-config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  appConfig.initalize();
 
   FlutterError.onError = (FlutterErrorDetails details) {
     debugPrint("FLUTTER CONTEXT : ${details.context}");
@@ -21,6 +23,7 @@ void main() async {
         runApp(app);
       },
       (dynamic error, dynamic stack) {
+        debugPrint("FLUTTER ERROR : ${error.toString()}");
         //FIREBASE CRASHYLYTICS
       },
     );
