@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   } else if (snapshot.hasData && snapshot.data == false) {
                     return Center(
-                      child: Text("data"),
+                      child: Text(weatherBloc.latestWeather!.name.toString()),
                     );
                   }
                   return Text('Hello World');
