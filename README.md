@@ -1,6 +1,6 @@
-# farm_setu_assignment
+# FARM SETU ASSIGNMENT : WEATHER APP
 
-FarmSetu Assignment Flutter App
+FarmSetu Assignment Flutter App IOS and Android
 
 ## CORE
 
