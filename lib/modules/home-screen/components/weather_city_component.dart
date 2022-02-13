@@ -1,3 +1,4 @@
+import 'package:farm_setu_assignment/modules/home-screen/components/google_map_component.dart';
 import 'package:flutter/material.dart';
 
 class WeatherCityComponent extends StatelessWidget {
@@ -12,9 +13,9 @@ class WeatherCityComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // ClipRRect(
-        //     borderRadius: BorderRadius.circular(10),
-        //     child: MapComponent()),
+        ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: const MapComponent()),
         Container(
           height: 200,
           width: double.infinity,
