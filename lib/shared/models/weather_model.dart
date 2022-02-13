@@ -4,12 +4,13 @@
 
 import 'dart:convert';
 
-Weather weatherFromJson(String str) => Weather.fromJson(json.decode(str));
+WeatherModel weatherFromJson(String str) =>
+    WeatherModel.fromJson(json.decode(str));
 
-String weatherToJson(Weather data) => json.encode(data.toJson());
+String weatherToJson(WeatherModel data) => json.encode(data.toJson());
 
-class Weather {
-  Weather({
+class WeatherModel {
+  WeatherModel({
     this.coord,
     this.weather,
     this.base,
@@ -26,7 +27,7 @@ class Weather {
   });
 
   Coord? coord;
-  List<WeatherElement>? weather;
+  List<WeatherModelElement>? weather;
   String? base;
   Main? main;
   int? visibility;
@@ -39,12 +40,12 @@ class Weather {
   String? name;
   int? cod;
 
-  factory Weather.fromJson(Map<String, dynamic> json) => Weather(
+  factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
         coord: json["coord"] == null ? null : Coord.fromJson(json["coord"]),
         weather: json["weather"] == null
             ? null
-            : List<WeatherElement>.from(
-                json["weather"].map((x) => WeatherElement.fromJson(x))),
+            : List<WeatherModelElement>.from(
+                json["weather"].map((x) => WeatherModelElement.fromJson(x))),
         base: json["base"],
         main: json["main"] == null ? null : Main.fromJson(json["main"]),
         visibility: json["visibility"],
@@ -180,8 +181,8 @@ class Sys {
       };
 }
 
-class WeatherElement {
-  WeatherElement({
+class WeatherModelElement {
+  WeatherModelElement({
     this.id,
     this.main,
     this.description,
@@ -193,7 +194,8 @@ class WeatherElement {
   String? description;
   String? icon;
 
-  factory WeatherElement.fromJson(Map<String, dynamic> json) => WeatherElement(
+  factory WeatherModelElement.fromJson(Map<String, dynamic> json) =>
+      WeatherModelElement(
         id: json["id"],
         main: json["main"],
         description: json["description"],
