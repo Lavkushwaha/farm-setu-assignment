@@ -1,5 +1,6 @@
 import 'package:farm_setu_assignment/blocs/base_bloc.dart';
 import 'package:farm_setu_assignment/shared/models/api_result_model.dart';
+import 'package:farm_setu_assignment/shared/models/weather_daily.dart';
 import 'package:farm_setu_assignment/shared/models/weather_model.dart';
 import 'package:farm_setu_assignment/shared/repositories/weather_repository.dart';
 import 'package:farm_setu_assignment/shared/services/geolocation_service.dart';
@@ -9,8 +10,12 @@ import 'package:rxdart/rxdart.dart';
 
 class WeatherBloc extends BaseBloc {
   BehaviorSubject<bool> loadingController = BehaviorSubject<bool>.seeded(true);
+  BehaviorSubject<bool> historyLoadingController =
+      BehaviorSubject<bool>.seeded(true);
 
-  Weather? latestWeather;
+  WeatherModel? latestWeather;
+
+  WeatherDailyModel? weatherDaily;
 
   getWeatherData() async {
     loadingController.add(true);
@@ -22,7 +27,7 @@ class WeatherBloc extends BaseBloc {
       if (state is SuccessState) {
         debugPrint('weather data fetched');
 
-        latestWeather = Weather.fromJson(state.value);
+        latestWeather = WeatherModel.fromJson(state.value);
 
         loadingController.sink.add(false);
         return state.value;
@@ -46,7 +51,7 @@ class WeatherBloc extends BaseBloc {
       if (state is SuccessState) {
         debugPrint('weather daily fetched');
 
-        // latestWeather = Weather.fromJson(state.value);
+        weatherDaily = WeatherDailyModel.fromJson(state.value);
 
         loadingController.sink.add(false);
         return state.value;
@@ -61,32 +66,34 @@ class WeatherBloc extends BaseBloc {
   }
 
   getWeatherhistory() async {
-    loadingController.add(true);
+    historyLoadingController.add(true);
 
     try {
       Position loc = await geoLocationService.getCurrentPosition();
-      ApiResult<dynamic> state = await weatherRepository.getWeatherDaily(
+      ApiResult<dynamic> state = await weatherRepository.getWeatherHistory(
           loc.latitude.toString(), loc.longitude.toString());
       if (state is SuccessState) {
-        debugPrint('weather daily fetched');
+        debugPrint('weather history fetched');
 
         // latestWeather = Weather.fromJson(state.value);
 
-        loadingController.sink.add(false);
+        historyLoadingController.sink.add(false);
         return state.value;
       } else if (state is ErrorState) {
+        historyLoadingController.addError(state.error);
+
         loadingController.sink.add(false);
         return null;
       }
     } catch (e) {
-      loadingController.addError(e);
-      loadingController.sink.add(false);
+      historyLoadingController.addError(e);
+      historyLoadingController.sink.add(false);
     }
   }
 
   @override
   void dispose() {
-    loadingController.close();
+    historyLoadingController.close();
   }
 }
 
