@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 class GeoLocationService {
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
 
-  StreamSubscription<Position>? _positionStreamSubscription;
+  // StreamSubscription<Position>? _positionStreamSubscription;
   StreamSubscription<ServiceStatus>? _serviceStatusStreamSubscription;
   bool positionStreamStarted = false;
 
