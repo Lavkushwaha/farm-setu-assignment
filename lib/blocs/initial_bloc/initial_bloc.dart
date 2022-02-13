@@ -25,6 +25,7 @@ class InitialBloc extends BaseBloc {
       debugPrint("checking for data");
 
       await weatherBloc.getWeatherData();
+      await weatherBloc.getDailyWeather();
 
       // loadingController.add(false);
       appNavigationService.pushReplacementNamed(Routes.home);
