@@ -47,15 +47,17 @@ class _InitScreenState extends State<InitScreen> {
                     stream: initialBloc.loadingController,
                     builder: (context, snapshot) {
                       if (snapshot.hasData && snapshot.data == true) {
-                        return Text('Fetching', style: TextStyle(fontSize: 20));
+                        return const Text('Fetching',
+                            style: TextStyle(fontSize: 20));
                       } else {
-                        return Text('...', style: TextStyle(fontSize: 20));
+                        return const Text('...',
+                            style: TextStyle(fontSize: 20));
                       }
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Center(
+                const Center(
                   child: CircularProgressIndicator(
                     strokeWidth: 1,
                   ),
