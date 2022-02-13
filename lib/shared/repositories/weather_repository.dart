@@ -6,6 +6,12 @@ class WeatherRepository {
 
   Future<ApiResult> getWeatherData(String lat, String lon) =>
       weatherProvider.getWeatherData(lat, lon);
+
+  Future<ApiResult> getWeatherDaily(String lat, String lon) =>
+      weatherProvider.getDailyWeather(lat, lon);
+
+  Future<ApiResult> getWeatherHistory(String lat, String lon) =>
+      weatherProvider.getWeatherHistory(lat, lon);
 }
 
 final WeatherRepository weatherRepository = WeatherRepository();
