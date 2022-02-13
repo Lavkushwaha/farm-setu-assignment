@@ -1,16 +1,17 @@
 // To parse this JSON data, do
 //
-//     final weatherDaily = weatherDailyFromJson(jsonString);
+//     final weatherDailyModel = weatherDailyModelFromJson(jsonString);
 
 import 'dart:convert';
 
-WeatherDaily weatherDailyFromJson(String str) =>
-    WeatherDaily.fromJson(json.decode(str));
+WeatherDailyModel weatherDailyModelFromJson(String str) =>
+    WeatherDailyModel.fromJson(json.decode(str));
 
-String weatherDailyToJson(WeatherDaily data) => json.encode(data.toJson());
+String weatherDailyModelToJson(WeatherDailyModel data) =>
+    json.encode(data.toJson());
 
-class WeatherDaily {
-  WeatherDaily({
+class WeatherDailyModel {
+  WeatherDailyModel({
     this.lat,
     this.lon,
     this.timezone,
@@ -24,7 +25,8 @@ class WeatherDaily {
   int? timezoneOffset;
   List<Daily>? daily;
 
-  factory WeatherDaily.fromJson(Map<String, dynamic> json) => WeatherDaily(
+  factory WeatherDailyModel.fromJson(Map<String, dynamic> json) =>
+      WeatherDailyModel(
         lat: json["lat"].toDouble(),
         lon: json["lon"].toDouble(),
         timezone: json["timezone"],
@@ -64,7 +66,7 @@ class Daily {
     this.snow,
   });
 
-  DateTime? dt;
+  int? dt;
   int? sunrise;
   int? sunset;
   int? moonrise;
@@ -81,12 +83,11 @@ class Daily {
   List<Weather>? weather;
   int? clouds;
   double? pop;
-  int? uvi;
+  var uvi;
   double? snow;
 
   factory Daily.fromJson(Map<String, dynamic> json) => Daily(
-        dt: json["dt"] == null ? null : DateTime.parse(json["dt"]),
-        sunrise: json["sunrise"],
+        dt: json["dt"],
         sunset: json["sunset"],
         moonrise: json["moonrise"],
         moonset: json["moonset"],
